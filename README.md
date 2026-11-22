@@ -10,7 +10,7 @@ A full-stack event ticketing app, built with a security-first approach: browse e
 
 | Events | My tickets | Admin |
 | --- | --- | --- |
-| ![Events](docs/screenshots/events.png) | ![My tickets](docs/screenshots/tickets.png) | ![Admin](docs/screenshots/admin.png) |
+| ![events](docs/screenshots/events.png) | ![My tickets](docs/screenshots/personal-tickets.png) | ![Admin](docs/screenshots/admin-panel.png) |
 
 ## Features
 
