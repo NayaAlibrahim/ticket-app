@@ -6,7 +6,10 @@ const { requireAuth, requireRole } = require('../middleware/auth');
 
 const router = express.Router();
 
+const CATEGORIES = ['Music', 'Comedy', 'Theatre', 'Sports', 'Conferences'];
+
 const eventSchema = z.object({
+  category: z.enum(CATEGORIES),
   title: z.string().min(1).max(200),
   description: z.string().max(2000).optional(),
   venue: z.string().min(1).max(200),
@@ -25,9 +28,9 @@ router.post('/', requireAuth, requireRole('admin'), async (req, res) => {
   if (!parsed.success) return res.status(400).json({ error: 'Invalid event data' });
   const e = parsed.data;
   const result = await pool.query(
-    `INSERT INTO events (title, description, venue, starts_at, price_cents, capacity)
-     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-    [e.title, e.description || null, e.venue, e.starts_at, e.price_cents, e.capacity]
+    `INSERT INTO events (title, description, venue, starts_at, price_cents, capacity, category)
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+    [e.title, e.description || null, e.venue, e.starts_at, e.price_cents, e.capacity, e.category]
   );
   logger.info('event_created', { adminId: req.user.id, eventId: result.rows[0].id });
   res.status(201).json(result.rows[0]);
