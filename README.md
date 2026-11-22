@@ -9,8 +9,8 @@ A full-stack event ticketing app, built with a security-first approach: browse e
 ![Home page](docs/screenshots/home.png)
 
 | Events | My tickets | Admin | Login |
-| --- | --- | --- |
-| ![events](docs/screenshots/events.png) | ![My tickets](docs/screenshots/personal-tickets.png) | ![Admin](docs/screenshots/admin-panel.png) |(docs/screenshots/login-signup.png) |
+| --- | --- | --- | --- |
+| ![events](docs/screenshots/events.png) | ![My tickets](docs/screenshots/personal-tickets.png) | ![Admin](docs/screenshots/admin-panel.png) | ![Login](docs/screenshots/login-signup.png) |
 
 ## Features
 
