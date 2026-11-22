@@ -1,0 +1,27 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  role VARCHAR(10) NOT NULL DEFAULT 'user' CHECK (role IN ('user','admin')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE events (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  description TEXT,
+  venue VARCHAR(200) NOT NULL,
+  starts_at TIMESTAMPTZ NOT NULL,
+  price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
+  capacity INTEGER NOT NULL CHECK (capacity > 0),
+  category VARCHAR(30) NOT NULL DEFAULT 'Other',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE bookings (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+  quantity INTEGER NOT NULL CHECK (quantity BETWEEN 1 AND 10),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
